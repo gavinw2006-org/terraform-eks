@@ -12,7 +12,7 @@ data "aws_availability_zones" "available" {}
 
 locals {
   //cluster_name = "education-eks-${random_string.suffix.result}"
-  cluster_name = "foobz-eks1"
+  cluster_name = "gw-eks1"
 }
 
 resource "random_string" "suffix" {
@@ -24,7 +24,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.2.0"
 
-  name                 = "foobz-eks1"
+  name                 = "gw-eks1"
   cidr                 = "10.6.0.0/16"
   azs                  = data.aws_availability_zones.available.names
   private_subnets  = ["10.6.21.0/24", "10.6.22.0/24", "10.6.23.0/24"]
@@ -49,32 +49,32 @@ module "vpc" {
 }
 
 // Manually add
-resource "aws_subnet" "foobz-eks1-voltmesh-ext-subnet-1" {
+resource "aws_subnet" "gw-eks1-voltmesh-ext-subnet-1" {
     vpc_id = module.vpc.vpc_id
     availability_zone  = "ap-southeast-1a"
     map_public_ip_on_launch = "true"
     cidr_block  = "10.6.31.0/24"
     tags = {
-        Name = "foobz-eks1-voltmesh-ext-subnet-1"
+        Name = "gw-eks1-voltmesh-ext-subnet-1"
     }
 }
 
-resource "aws_subnet" "foobz-eks1-voltmesh-ext-subnet-2" {
+resource "aws_subnet" "gw-eks1-voltmesh-ext-subnet-2" {
     vpc_id = module.vpc.vpc_id
     availability_zone  = "ap-southeast-1b"
     map_public_ip_on_launch = "true"
     cidr_block  = "10.6.32.0/24"
     tags = {
-        Name = "foobz-eks1-voltmesh-ext-subnet-2"
+        Name = "gw-eks1-voltmesh-ext-subnet-2"
     }
 }
 
-resource "aws_subnet" "foobz-eks1-voltmesh-ext-subnet-3" {
+resource "aws_subnet" "gw-eks1-voltmesh-ext-subnet-3" {
     vpc_id = module.vpc.vpc_id
     availability_zone  = "ap-southeast-1c"
     map_public_ip_on_launch = "true"
     cidr_block  = "10.6.33.0/24"
     tags = {
-        Name = "foobz-eks1-voltmesh-ext-subnet-3"
+        Name = "gw-eks1-voltmesh-ext-subnet-3"
     }
 }
